@@ -2257,7 +2257,7 @@ class SimulationAgent:
                 ctx[history_key] = []
             
             # Update modeling history
-            context["modeling_history"] = history
+            ctx[history_key].append(summary_entry)
             
             # Limit history size, keep last 20 entries
             if len(ctx[history_key]) > 20:

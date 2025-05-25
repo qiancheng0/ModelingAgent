@@ -266,8 +266,7 @@ class WritingEngine:
             
             writing += f"# Problem Background\n{problem_background}\n\n\n# Problem Restatement\n{problem_restatement}\n\n\n"
         except:
-            from IPython import embed
-            embed()
+            pass
         
         for subtask_idx in range(len(task_decomposition)):
             try:
