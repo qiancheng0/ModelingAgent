@@ -1,0 +1,22 @@
+model_name: local
+port: 8000
+openai_api_key: YOUR_OPENAI_API_KEY
+serper_api_key: YOUR_SERPER_API_KEY
+copy_files_to_workspace: true
+
+use_scratch_board: false
+use_planner: true
+log_planner_steps: true
+planner_name: BasePlanner
+
+# Core configuration
+core:
+  type: local
+  model:
+    type: local
+    name: YOUR_MODEL_NAME
+    temperature: 0
+    max_tokens: 4096
+  api:
+    openai:
+      key: ${openai_api_key}

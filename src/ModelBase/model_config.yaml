@@ -1,0 +1,5 @@
+model_name: local
+port: 8000
+openai_api_key: YOUR_OPENAI_API_KEY
+gemini_api_key: YOUR_GEMINI_API_KEY
+gemini_base_url: YOUR_GEMINI_BASE_URL

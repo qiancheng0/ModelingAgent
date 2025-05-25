@@ -1,0 +1,9 @@
+openai
+vllm
+google-generativeai
+PyPDF2
+pymupdf
+pymupdf4llm
+zipfile
+tarfile
+gzip

@@ -1,0 +1,56 @@
+model:
+  type: local
+  name: QwQ-32B
+  openai_api_key: YOUR_OPENAI_API_KEY
+  openai_base_url: https://api.openai.com/v1
+  max_len: 8192
+  temperature: 0
+
+data:
+  # API Key Configuration
+  serper_api_key: YOUR_SERPER_API_KEY  # API key for web_search_tool
+  
+  # Data Collection Configuration
+  max_iter: 20                  # Maximum iterations for each collection attempt
+  min_score_threshold: 8      # Minimum quality score threshold for data collection (max score 15)
+  max_attempts: 10              # Maximum attempts to collect a single data point
+  critic_interval: 5            # Evaluate collection progress every N function calls
+  max_workers: 1               # Maximum number of parallel threads for data point processing
+  
+  # Log and Working Directory Configuration
+  save_history: true            # Whether to save detailed history
+  trim_history_size: 50         # Maximum number of history entries to keep
+  
+  # Resource Limit Configuration
+  timeout_per_request: 120      # Timeout for each API request (seconds)
+  max_tokens_per_request: 8000  # Maximum tokens per request
+  
+  # File Configuration
+  markdown_output: true         # Whether to generate Markdown summary for each data point
+  csv_export: true              # Whether to export data to CSV
+  create_data_dir: true         # Whether to create separate directory for each data point
+  snapshot: true                # Whether to create snapshot for each data point
+  bottom_k_data: 2              # Minimum amount of data to collect per data point
+  overwrite: false
+
+selection:
+  rounds: 3
+
+modeling:
+  rounds: 3
+
+simulation:
+  # —— LLM Call Related ——
+  max_api_retries: 5            # ← new: Number of automatic retries for LLM 429/500 errors
+  api_base_wait_time: 10        # ← new: Base seconds for exponential backoff
+  
+  # —— Single Component Modeling Loop ——
+  max_iter: 30                  # ← new: Maximum iterations inside single_modeling_run
+  critic_interval: 3            # ← new: Trigger mid-term critic every N steps
+  score_threshold: 10           # ← Score threshold only used for final success determination (no longer used for early stopping)
+  
+  # —— run() Level ——
+  max_retry_each: 5             # ← new: Maximum retries for each modeling group workspace rebuild
+  auto_early_stop: true        # ← new: Whether to automatically stop when score_threshold is reached
+  overwrite: false
+  # (Add more custom fields if needed, code has default values so not necessary to write)

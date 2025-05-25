@@ -1,0 +1,6 @@
+model_name: Qwen
+openai_api_key: YOUR_OPENAI_API_KEY
+
+use_scratch_board: false
+log_planner_steps: true
+planner_name: "BasePlanner"
