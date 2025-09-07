@@ -26,13 +26,7 @@ class BaseAgent:
         
         self.core = Core(config)
         self.shared_context = SharedContext(config)
-        
-        self.selection_engine = SelectionEngine(config, self.core, self.shared_context)
-        self.modeling_engine = ModelingEngine(config, self.core, self.shared_context)
-        self.data_agent = DataAgent(config, self.core, self.shared_context)
-        self.simulation_agent = SimulationAgent(config, self.core, self.shared_context)
-        self.writing_engine = WritingEngine(config, self.core, self.shared_context)
-        
+
         self.exist = 0
         self.todo = 0
     
@@ -72,6 +66,9 @@ class BaseAgent:
         print(f"[INFO] Working dir: {self.config['log_dir']}")
         self.todo += 1
 
+        self.selection_engine = SelectionEngine(self.config, self.core, self.shared_context)
+        self.modeling_engine = ModelingEngine(self.config, self.core, self.shared_context)
+        
         # idea
         self.shared_context.add_context("grading_points", self.config["requirements"])
         self.selection_engine.get_modeling_question()
@@ -84,7 +81,11 @@ class BaseAgent:
             self.modeling_engine.modeling_refine_loop(subtask_idx, 0)
             self.modeling_engine.factor_extraction(subtask_idx, 0)
             self.modeling_engine.factor_critic(subtask_idx, 0)
-
+        
+        self.data_agent = DataAgent(self.config, self.core, self.shared_context)
+        self.simulation_agent = SimulationAgent(self.config, self.core, self.shared_context)
+        self.writing_engine = WritingEngine(self.config, self.core, self.shared_context)
+        
         # data / modeling
         self.data_agent.run()
         self.simulation_agent.run()
